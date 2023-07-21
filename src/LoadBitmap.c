@@ -12,7 +12,7 @@
 #include <string.h>
 #include "Tilengine.h"
 #include "LoadFile.h"
-#include "png.h"
+/* #include "png.h" */
 #include "DIB.h"
 #include "Bitmap.h"
 #include "Palette.h"
@@ -260,78 +260,78 @@ TLN_Bitmap TLN_LoadBitmap (const char* filename)
 /* Loads PNG using libpng 1.2 */
 static TLN_Bitmap LoadPNG (const char* filename)
 {
-	TLN_Bitmap bitmap = NULL;
-	FILE* fp;
-	png_struct* png;
-	png_info* info;
-	int width, height;
-	png_byte color_type;
-	png_byte bit_depth;
-	png_bytep *row_pointers;
-	png_byte header[8];
-	int channels;
-	int y;
+	/* TLN_Bitmap bitmap = NULL; */
+	/* FILE* fp; */
+	/* png_struct* png; */
+	/* png_info* info; */
+	/* int width, height; */
+	/* png_byte color_type; */
+	/* png_byte bit_depth; */
+	/* png_bytep *row_pointers; */
+	/* png_byte header[8]; */
+	/* int channels; */
+	/* int y; */
 
-	fp = FileOpen (filename);
-	if (!fp)
-		return NULL;
+	/* fp = FileOpen (filename); */
+	/* if (!fp) */
+	/* 	return NULL; */
 
-	fread (header, 8, 1, fp);
-	if (png_sig_cmp(header, 0, 8))
-	{
-		FileClose (fp);
-		return NULL;
-	}
+	/* fread (header, 8, 1, fp); */
+	/* if (png_sig_cmp(header, 0, 8)) */
+	/* { */
+	/* 	FileClose (fp); */
+	/* 	return NULL; */
+	/* } */
 
-	png = png_create_read_struct(PNG_LIBPNG_VER_STRING, NULL, NULL, NULL);
-	info = png_create_info_struct(png);
-	
-	setjmp(png_jmpbuf(png));
-	png_init_io(png, fp);
-	png_set_sig_bytes(png, 8);
-	png_read_info(png, info);
+	/* png = png_create_read_struct(PNG_LIBPNG_VER_STRING, NULL, NULL, NULL); */
+	/* info = png_create_info_struct(png); */
 
-	width      = png_get_image_width(png, info);
-	height     = png_get_image_height(png, info);
-	color_type = png_get_color_type(png, info);
-	bit_depth  = png_get_bit_depth(png, info);
-	channels   = png_get_channels(png, info);
-    
-    png_read_update_info(png, info);
+	/* setjmp(png_jmpbuf(png)); */
+	/* png_init_io(png, fp); */
+	/* png_set_sig_bytes(png, 8); */
+	/* png_read_info(png, info); */
 
-	/* adjust actual bit depth */
-	bit_depth *= channels;
+	/* width      = png_get_image_width(png, info); */
+	/* height     = png_get_image_height(png, info); */
+	/* color_type = png_get_color_type(png, info); */
+	/* bit_depth  = png_get_bit_depth(png, info); */
+	/* channels   = png_get_channels(png, info); */
 
-	setjmp(png_jmpbuf(png));
-	row_pointers = (png_bytep*) malloc(sizeof(png_bytep) * height);
-	bitmap = TLN_CreateBitmap (width, height, bit_depth);
-	for (y=0; y<height; y++)
-		row_pointers[y] = (png_byte*) TLN_GetBitmapPtr (bitmap, 0,y);
-	png_read_image(png, row_pointers);
-	free (row_pointers);
+    /* png_read_update_info(png, info); */
 
-	/* 8 bpp indexed palette */
-	if (color_type == PNG_COLOR_TYPE_PALETTE)
-	{
-		png_colorp png_palette = NULL;
-		int palette_entries = 0;
-		TLN_Palette palette;
-		int c;
+	/* /\* adjust actual bit depth *\/ */
+	/* bit_depth *= channels; */
 
-		png_get_PLTE(png,info, &png_palette, &palette_entries);
+	/* setjmp(png_jmpbuf(png)); */
+	/* row_pointers = (png_bytep*) malloc(sizeof(png_bytep) * height); */
+	/* bitmap = TLN_CreateBitmap (width, height, bit_depth); */
+	/* for (y=0; y<height; y++) */
+	/* 	row_pointers[y] = (png_byte*) TLN_GetBitmapPtr (bitmap, 0,y); */
+	/* png_read_image(png, row_pointers); */
+	/* free (row_pointers); */
 
-		palette = TLN_CreatePalette (palette_entries);
-		for (c=0; c<palette_entries; c++)
-		{
-			TLN_SetPaletteColor (palette, c, 
-				png_palette[c].red, png_palette[c].green, png_palette[c].blue);
-		}
-		TLN_SetBitmapPalette (bitmap, palette);
-	}
+	/* /\* 8 bpp indexed palette *\/ */
+	/* if (color_type == PNG_COLOR_TYPE_PALETTE) */
+	/* { */
+	/* 	png_colorp png_palette = NULL; */
+	/* 	int palette_entries = 0; */
+	/* 	TLN_Palette palette; */
+	/* 	int c; */
 
-	FileClose(fp);
-	png_destroy_read_struct (&png, &info, NULL);
-	return bitmap;
+	/* 	png_get_PLTE(png,info, &png_palette, &palette_entries); */
+
+	/* 	palette = TLN_CreatePalette (palette_entries); */
+	/* 	for (c=0; c<palette_entries; c++) */
+	/* 	{ */
+	/* 		TLN_SetPaletteColor (palette, c,  */
+	/* 			png_palette[c].red, png_palette[c].green, png_palette[c].blue); */
+	/* 	} */
+	/* 	TLN_SetBitmapPalette (bitmap, palette); */
+	/* } */
+
+	/* FileClose(fp); */
+	/* png_destroy_read_struct (&png, &info, NULL); */
+	/* return bitmap; */
 }
 
 /* loads BMP */
