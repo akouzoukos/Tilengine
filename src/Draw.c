@@ -277,46 +277,46 @@ Tilescan;
 /* process flip flags */
 static inline void process_flip(uint16_t flags, Tilescan* scan)
 {
-	/* /\* H/V flip *\/ */
-	/* if (flags & FLAG_FLIPX) */
-	/* { */
-	/* 	scan->dx = -scan->dx; */
-	/* 	scan->srcx = scan->width - 1; */
-	/* } */
-	/* if (flags & FLAG_FLIPY) */
-	/* 	scan->srcy = scan->height - scan->srcy - 1; */
+	/* H/V flip */
+	if (flags & FLAG_FLIPX)
+	{
+		scan->dx = -scan->dx;
+		scan->srcx = scan->width - 1;
+	}
+	if (flags & FLAG_FLIPY)
+		scan->srcy = scan->height - scan->srcy - 1;
 }
 
 /* process flip & rotation flags */
 static inline void process_flip_rotation(uint16_t flags, Tilescan* scan)
 {
-	/* if (flags & FLAG_ROTATE) */
-	/* { */
-	/* 	int tmp = scan->srcx; */
-	/* 	scan->srcx = scan->srcy; */
-	/* 	scan->srcy = tmp; */
-	/* 	scan->dx *= scan->stride; */
+	if (flags & FLAG_ROTATE)
+	{
+		int tmp = scan->srcx;
+		scan->srcx = scan->srcy;
+		scan->srcy = tmp;
+		scan->dx *= scan->stride;
 
-	/* 	/\* H/V flip *\/ */
-	/* 	if (flags & FLAG_FLIPX) */
-	/* 	{ */
-	/* 		scan->dx = -scan->dx; */
-	/* 		scan->srcy = scan->height - scan->srcy - 1; */
-	/* 	} */
-	/* 	if (flags & FLAG_FLIPY) */
-	/* 		scan->srcx = scan->width - scan->srcx - 1; */
-	/* } */
-	/* else */
-	/* { */
-	/* 	/\* H/V flip *\/ */
-	/* 	if (flags & FLAG_FLIPX) */
-	/* 	{ */
-	/* 		scan->dx = -scan->dx; */
-	/* 		scan->srcx = scan->width - scan->srcx - 1; */
-	/* 	} */
-	/* 	/\* if (flags & FLAG_FLIPY) *\/ */
-	/* 	/\* 	scan->srcy = scan->height - scan->srcy - 1; *\/ */
-	/* } */
+		/* H/V flip */
+		if (flags & FLAG_FLIPX)
+		{
+			scan->dx = -scan->dx;
+			scan->srcy = scan->height - scan->srcy - 1;
+		}
+		if (flags & FLAG_FLIPY)
+			scan->srcx = scan->width - scan->srcx - 1;
+	}
+	else
+	{
+		/* H/V flip */
+		if (flags & FLAG_FLIPX)
+		{
+			scan->dx = -scan->dx;
+			scan->srcx = scan->width - scan->srcx - 1;
+		}
+		if (flags & FLAG_FLIPY)
+			scan->srcy = scan->height - scan->srcy - 1;
+	}
 }
 
 /* draw scanline of tiled background */
