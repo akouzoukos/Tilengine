@@ -11,6 +11,8 @@
 #ifndef _TILENGINE_H
 #define _TILENGINE_H
 
+#include "SDL2/SDL.h"
+
 /**
  * \defgroup types
  * \brief Common data types
@@ -469,8 +471,12 @@ TLNAPI uint32_t TLN_GetTicks (void);
 TLNAPI uint32_t TLN_GetAverageFps(void);
 TLNAPI int TLN_GetWindowWidth(void);
 TLNAPI int TLN_GetWindowHeight(void);
+<<<<<<< HEAD
 TLNAPI int TLN_GetWindowScaleFactor(void);
 TLNAPI void TLN_SetWindowScaleFactor(int);
+=======
+TLNAPI SDL_Window * TLN_GetWindow(void);
+>>>>>>> d244bf1 (changes)
 /**@}*/
 
 /**
@@ -502,6 +508,7 @@ TLNAPI int TLN_GetTilesetNumTiles(TLN_Tileset tileset);
 TLNAPI TLN_Palette TLN_GetTilesetPalette (TLN_Tileset tileset);
 TLNAPI TLN_SequencePack TLN_GetTilesetSequencePack (TLN_Tileset tileset);
 TLNAPI bool TLN_DeleteTileset (TLN_Tileset tileset);
+TLNAPI uint8_t* TLN_GetTilesetPtr (TLN_Tileset tileset,int index, int x, int y);
 /**@}*/
 
 /**

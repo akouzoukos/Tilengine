@@ -404,6 +404,12 @@ TLN_Bitmap GetTilesetBitmap(TLN_Tileset tileset, int tileid)
 	return NULL;
 }
 
+uint8_t* TLN_GetTilesetPtr (TLN_Tileset tileset, int index, int x, int y){
+	return &tileset->data[(((index << tileset->vshift) + y) << tileset->hshift) + x];
+/* #define GetTilesetPixel(tileset,index,x,y) \ */
+/* 	tileset->data[(((index << tileset->vshift) + y) << tileset->hshift) + x] */
+}
+
 /* devuelve si la línea usa color key */
 static bool HasTransparentPixels (uint8_t* src, int width)
 {

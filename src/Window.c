@@ -183,14 +183,14 @@ static bool create_window(void)
 	{
 		/* Default input PLAYER 1 */
 		TLN_EnableInput(PLAYER1, true);
-		TLN_DefineInputKey(PLAYER1, INPUT_UP, SDLK_UP);
-		TLN_DefineInputKey(PLAYER1, INPUT_DOWN, SDLK_DOWN);
-		TLN_DefineInputKey(PLAYER1, INPUT_LEFT, SDLK_LEFT);
-		TLN_DefineInputKey(PLAYER1, INPUT_RIGHT, SDLK_RIGHT);
-		TLN_DefineInputKey(PLAYER1, INPUT_BUTTON1, SDLK_z);
-		TLN_DefineInputKey(PLAYER1, INPUT_BUTTON2, SDLK_x);
-		TLN_DefineInputKey(PLAYER1, INPUT_BUTTON3, SDLK_c);
-		TLN_DefineInputKey(PLAYER1, INPUT_BUTTON4, SDLK_v);
+		TLN_DefineInputKey(PLAYER1, INPUT_UP, SDLK_c);
+		TLN_DefineInputKey(PLAYER1, INPUT_DOWN, SDLK_k);
+		TLN_DefineInputKey(PLAYER1, INPUT_LEFT, SDLK_j);
+		TLN_DefineInputKey(PLAYER1, INPUT_RIGHT, SDLK_l);
+		TLN_DefineInputKey(PLAYER1, INPUT_BUTTON1, SDLK_i);
+		TLN_DefineInputKey(PLAYER1, INPUT_BUTTON2, SDLK_SEMICOLON);
+		TLN_DefineInputKey(PLAYER1, INPUT_BUTTON3, SDLK_z);
+		TLN_DefineInputKey(PLAYER1, INPUT_BUTTON4, SDLK_s);
 		TLN_DefineInputKey(PLAYER1, INPUT_START, SDLK_RETURN);
 		TLN_DefineInputKey(PLAYER1, INPUT_QUIT, SDLK_ESCAPE);
 		TLN_DefineInputKey(PLAYER1, INPUT_CRT, SDLK_BACKSPACE);
@@ -388,7 +388,7 @@ bool TLN_CreateWindow (const char* overlay, int flags)
 		return true;
 	}
 
-	if (SDL_Init (SDL_INIT_VIDEO|SDL_INIT_JOYSTICK) != 0)
+	if (SDL_Init (SDL_INIT_VIDEO|SDL_INIT_JOYSTICK|SDL_INIT_AUDIO) != 0)
 		return false;
 
 	/* fill parameters for window creation */
@@ -1088,6 +1088,10 @@ void TLN_SetWindowScaleFactor(int factor)
 	flags.value = wnd_params.flags;
 	flags.factor = factor;
 	wnd_params.flags = flags.value;
+}
+
+TLNAPI SDL_Window * TLN_GetWindow(){
+	return window;
 }
 
 #endif
