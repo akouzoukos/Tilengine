@@ -11,7 +11,7 @@
 #ifndef _ENGINE_H
 #define _ENGINE_H
 
-#define NUM_PALETTES	8
+#define NUM_PALETTES	16
 #define INTERNAL_FPS	60
 
 #include "Tilengine.h"

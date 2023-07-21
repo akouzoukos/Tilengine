@@ -132,8 +132,8 @@ typedef union Tile
 			uint16_t flags;	/*!< attributes (FLAG_FLIPX, FLAG_FLIPY, FLAG_PRIORITY) */
 			struct
 			{
-				uint8_t unused : 5;
-				uint8_t palette : 3;
+				uint8_t unused : 4;
+				uint8_t palette : 4;
 				uint8_t tileset : 3;
 				bool masked : 1;
 				bool priority : 1;
