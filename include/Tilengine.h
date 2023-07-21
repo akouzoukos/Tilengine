@@ -471,12 +471,9 @@ TLNAPI uint32_t TLN_GetTicks (void);
 TLNAPI uint32_t TLN_GetAverageFps(void);
 TLNAPI int TLN_GetWindowWidth(void);
 TLNAPI int TLN_GetWindowHeight(void);
-<<<<<<< HEAD
 TLNAPI int TLN_GetWindowScaleFactor(void);
 TLNAPI void TLN_SetWindowScaleFactor(int);
-=======
 TLNAPI SDL_Window * TLN_GetWindow(void);
->>>>>>> d244bf1 (changes)
 /**@}*/
 
 /**
