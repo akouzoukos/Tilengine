@@ -23,6 +23,8 @@ x64_Release/
 *.pyc
 *.exe
 
+src/build/
+
 docs/screens/
 samples/assets/mslug/
 samples/assets/sunny_land/
