@@ -1,6 +1,8 @@
 # CC       = gcc
 SOURCES  = $(filter-out Test.c,$(wildcard *.c))
-OBJECTS  = $(SOURCES:.c=.o)
+BUILD = build/$(PLATFORM)
+# OBJECTS  = $(SOURCES:.c=.o)
+OBJECTS = $(addprefix $(BUILD)/, $(addsuffix .o, $(basename $(SOURCES))))
 INCPATH  = ../include
 
 # Windows specific flags
@@ -13,8 +15,7 @@ else
 # Linux specific flags (i686, x64 and arm)
 	ifeq ($(name),Linux)
 		LIBS = -lc
-		BIN  = libTilengine.a
-		LIBPATH = ../lib/linux_$(arch)
+		BIN  = $(BUILD)/libTilengine.a
 	endif
 # OSX specific flags
 	ifeq ($(name),Darwin)
@@ -32,20 +33,18 @@ CFLAGS += -Wno-unused-result -Wno-format-truncation
 .PHONY: all all-before all-after clean clean-custom
 
 all: all-before $(BIN) all-after
-	echo $(name)
-	echo $(arch)
 
 clean: clean-custom
 	${RM} $(OBJECTS) $(BIN) Test
 
 $(BIN): $(OBJECTS)
+	@mkdir -p $(BUILD)
 	$(AR) rcs $(BIN) $(OBJECTS) $(LIBS)
-	mkdir -p $(LIBPATH)
-	cp $(BIN) $(LIBPATH)
 
-Test: Test.c
-	$(RM) Test.o Test
-	$(CC) Test.c -o Test -I$(INCPATH) -L$(LIBPATH) -lTilengine -Wl,-rpath,$(LIBPATH)
+# Test: Test.c
+# 	$(RM) Test.o Test
+# 	$(CC) Test.c -o Test -I$(INCPATH) -L$(LIBPATH) -lTilengine -Wl,-rpath,$(LIBPATH)
 
-%.o: %.c
+$(BUILD)/%.o: %.c
+	@mkdir -p $(BUILD)
 	$(CC) -c $(CFLAGS) $< -o $@

@@ -24,6 +24,8 @@ x64_Release/
 *.exe
 *.a
 
+src/build/
+
 docs/screens/
 samples/assets/mslug/
 samples/assets/sunny_land/
