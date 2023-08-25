@@ -12,7 +12,6 @@
 #include <string.h>
 #include "Tilengine.h"
 #include "LoadFile.h"
-/* #include "png.h" */
 #include "DIB.h"
 #include "Bitmap.h"
 #include "Palette.h"
