@@ -1,7 +1,5 @@
-# CC       = gcc
 SOURCES  = $(filter-out Test.c,$(wildcard *.c))
 BUILD = build/$(PLATFORM)
-# OBJECTS  = $(SOURCES:.c=.o)
 OBJECTS = $(addprefix $(BUILD)/, $(addsuffix .o, $(basename $(SOURCES))))
 INCPATH  = ../include
 
@@ -27,8 +25,7 @@ else
 endif
 
 # common flags
-CFLAGS += -I$(INCPATH) -std=c99 -O2 -DLIB_EXPORTS
-CFLAGS += -Wno-unused-result -Wno-format-truncation
+CFLAGS += -I$(INCPATH)
 
 .PHONY: all all-before all-after clean clean-custom
 
