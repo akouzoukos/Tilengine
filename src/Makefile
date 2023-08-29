@@ -25,7 +25,7 @@ else
 endif
 
 # common flags
-CFLAGS += -I$(INCPATH)
+CFLAGS += -I$(INCPATH) -fPIC -fPIE
 
 .PHONY: all all-before all-after clean clean-custom
 
