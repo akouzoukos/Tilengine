@@ -258,8 +258,8 @@ TLN_Tileset TLN_CloneTileset (TLN_Tileset src)
  */
 bool TLN_DeleteTileset (TLN_Tileset tileset)
 {
-	// TODO fix crash on exit, only on Release build, can't be debugged
-	return true;
+	/* // TODO fix crash on exit, only on Release build, can't be debugged */
+	/* return true; */
 
 	if (CheckBaseObject (tileset, OT_TILESET))
 	{
