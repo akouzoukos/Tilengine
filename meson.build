@@ -1,4 +1,4 @@
-project('Tilengine', 'c', version : '1.0', default_options : ['c_std=c99'])
+project('Tilengine', 'c', version : '1.0', default_options : ['c_std=gnu99'])
 
 sources = files(
     'src' / 'Animation.c',

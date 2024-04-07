@@ -56,6 +56,7 @@
 #endif
 
 #include <stdio.h>
+#include <sys/types.h>
 
 /* version */
 #define TILENGINE_VER_MAJ	2
