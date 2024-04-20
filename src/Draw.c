@@ -29,8 +29,15 @@ static bool check_sprite_coverage(Sprite* sprite, int nscan)
 		return false;
 	if (sprite->dstrect.x2 < 0 || sprite->srcrect.x2 < 0)
 		return false;
-	if ((sprite->flags & FLAG_MASKED) && nscan >= engine->sprite_mask_top && nscan <= engine->sprite_mask_bottom)
-		return false;
+	if (sprite->flags & FLAG_MASKED){
+		const int top = engine->sprite_mask_top;
+		const int bot = engine->sprite_mask_bottom;
+
+		if((top < bot) && nscan >= top && nscan <= bot)
+			return false;
+		else if((top > bot) && (nscan < bot || nscan >= top))
+			return false;
+	}
 	return true;
 }
 
