@@ -55,6 +55,11 @@ else
   c_args = ['-O2', '-fpic', '-DLIB_EXPORTS', '-Wno-unused-result', '-Wno-format-truncation']
 endif
 
+if host_machine.system() != 'horizon' and host_machine.system() != 'emscripten'
+  c_args += '-DHAVE_OPENSSL'
+  deps += dependency('openssl')
+endif
+
 lib = static_library('Tilengine', sources, dependencies : deps, include_directories : inc, link_args: link_args,  c_args : c_args)
 
 #executable('Test', 'src/Test.c', include_directories : inc, link_with : lib)
